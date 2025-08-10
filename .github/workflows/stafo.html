@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play STEAL AN ANIME FROM OTHERS on Roblox - the ultimate anime tycoon game where you collect rare items and outsmart other players!">
+    <meta name="keywords" content="Roblox, Anime, Tycoon, Game, Steal, Collect, Multiplayer">
+    <title>STEAL AN ANIME FROM OTHERS | Roblox Anime Tycoon Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --main-color: #ff2d75;
+            --secondary-color: #6c5ce7;
+            --accent-color: #00cec9;
+            --dark-bg: #0f0f1a;
+            --darker-bg: #080811;
+            --text-light: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --text-dark: #1a1a2e;
+            --card-bg: rgba(30, 30, 45, 0.7);
+            --glow: 0 0 15px rgba(255, 45, 117, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 45, 117, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(108, 92, 231, 0.1) 0%, transparent 20%),
+                linear-gradient(to bottom, var(--darker-bg), var(--dark-bg));
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .play-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 5px 25px rgba(255, 45, 117, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 45, 117, 0.6);
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0) 45%,
+                rgba(255,255,255,0.15) 48%,
+                rgba(255,255,255,0) 50%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        /* GAME SHOWCASE */
+        .game-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin: 60px 0;
+            align-items: center;
+        }
+
+        .game-embed {
+            flex: 1;
+            min-width: 300px;
+            max-width: 800px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--glow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            border: 3px solid rgba(255,255,255,0.1);
+        }
+
+        .game-embed:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255, 45, 117, 0.7);
+        }
+
+        .game-embed iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .player-count {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            background: rgba(0,0,0,0.3);
+            padding: 12px 20px;
+            border-radius: 50px;
+            width: fit-content;
+        }
+
+        .player-count i {
+            color: var(--main-color);
+        }
+
+        .player-count .count {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .game-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(45deg, var(--main-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .game-info p {
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .feature:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .feature i {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        .feature-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* SCREENSHOTS CAROUSEL */
+        .screenshots {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .screenshots h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .screenshots h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 500px;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--main-color);
+            transform: scale(1.2);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 45, 117, 0.7);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+            border-radius: 15px 0 0 15px;
+        }
+
+        /* HOW TO PLAY SECTION */
+        .how-to-play {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .how-to-play h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .how-to-play h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .step {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .step p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* RARITY SYSTEM */
+        .rarity-system {
+            margin: 80px 0;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+            padding: 60px 20px;
+            border-radius: 15px;
+        }
+
+        .rarity-system h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .rarity-system h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .rarity-levels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .rarity-level {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid;
+            transition: transform 0.3s;
+        }
+
+        .rarity-level:hover {
+            transform: translateY(-10px);
+        }
+
+        .rarity-level.common {
+            border-color: #b0b0b0;
+        }
+
+        .rarity-level.uncommon {
+            border-color: #2ecc71;
+        }
+
+        .rarity-level.rare {
+            border-color: #3498db;
+        }
+
+        .rarity-level.epic {
+            border-color: #9b59b6;
+        }
+
+        .rarity-level.legendary {
+            border-color: #f1c40f;
+        }
+
+        .rarity-level.mythic {
+            border-color: #e74c3c;
+        }
+
+        .rarity-level h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .rarity-level.common h3 {
+            color: #b0b0b0;
+        }
+
+        .rarity-level.uncommon h3 {
+            color: #2ecc71;
+        }
+
+        .rarity-level.rare h3 {
+            color: #3498db;
+        }
+
+        .rarity-level.epic h3 {
+            color: #9b59b6;
+        }
+
+        .rarity-level.legendary h3 {
+            color: #f1c40f;
+        }
+
+        .rarity-level.mythic h3 {
+            color: #e74c3c;
+        }
+
+        .rarity-level p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+        }
+
+        .testimonials h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .testimonial {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--main-color);
+            opacity: 0.5;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--main-color);
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* SOCIAL & LINKS */
+        .social-links {
+            text-align: center;
+            margin: 100px 0;
+        }
+
+        .social-links h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .social-links h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 45, 117, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 45, 117, 0.5);
+        }
+
+        .social-btn:hover::before {
+            left: 100%;
+        }
+
+        .social-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* FAQ SECTION */
+        .faq {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .faq h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            font-family: 'Rubik', sans-serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .faq h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--main-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 20px 20px;
+        }
+
+        .faq-answer p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 50px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .footer-logo {
+            font-family: 'Rubik', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--main-color);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ANIMATIONS */
+        .animate-pop {
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            80% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        .pulse {
+            animation: pulse 1s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            .subtitle {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            .game-embed iframe {
+                height: 400px;
+            }
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .social-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            .carousel {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .game-info {
+                padding: 25px;
+            }
+            .feature {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .carousel {
+                height: 250px;
+            }
+            .carousel-caption {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="animate__animated animate__fadeInDown">STEAL AN ANIME FROM OTHERS</h1>
+            <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">The Ultimate Anime Tycoon Experience on Roblox!</p>
+            <a href="https://www.roblox.com/games/74183026678928/Steal-Anime-From-Others" class="play-btn animate__animated animate__fadeIn animate__delay-2s">
+                <i class="fas fa-gamepad"></i> Play Now
+            </a>
+        </header>
+
+        <div class="game-showcase">
+            <div class="game-embed animate__animated animate__fadeInLeft animate__delay-1s">
+                <iframe src="https://www.roblox.com/games/embed?placeId=74183026678928" allowfullscreen></iframe>
+            </div>
+            <div class="game-info animate__animated animate__fadeInRight animate__delay-1s">
+                <div class="player-count">
+                    <i class="fas fa-users"></i>
+                    <span class="count" id="playerCount">Loading...</span> players online
+                </div>
+                <h2>About The Game</h2>
+                <p>
+                    Dive into the craziest anime-themed stealing adventure! Collect rare anime items, outsmart other players, and build your ultimate anime stash. Will you become the top thief in this chaotic anime universe?
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-gem"></i>
+                        <div class="feature-content">
+                            <h3>Steal Rare Collectibles</h3>
+                            <p>Grab limited edition anime items from other players and add them to your collection</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-exchange-alt"></i>
+                        <div class="feature-content">
+                            <h3>Trade & Barter</h3>
+                            <p>Negotiate deals with other players to complete your perfect anime collection</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <div class="feature-content">
+                            <h3>Special Powers</h3>
+                            <p>Unlock unique abilities to give you an edge in stealing and protecting your items</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-trophy"></i>
+                        <div class="feature-content">
+                            <h3>Leaderboards</h3>
+                            <p>Compete to be the top thief and show off your skills to the whole community</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="screenshots">
+            <h2 class="animate__animated animate__fadeIn">Game Screenshots</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-btn next" onclick="nextSlide()">❯</button>
+                
+                <div class="carousel" id="carousel">
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/TDZcrssg/unblurimageai-no-Filter-2.jpg" alt="Stealing rare anime items from other players">
+                        <div class="carousel-caption">Steal rare anime collectibles from other players</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/WvQg0Qk1/unblurimageai-no-Filter-4.jpg" alt="Trading with other players in the game">
+                        <div class="carousel-caption">Trade and negotiate with other players</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/MxT8GrvY/unblurimageai-no-Filter-5.jpg" alt="Special powers and abilities in action">
+                        <div class="carousel-caption">Use special powers to gain an advantage</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://i.ibb.co/3zqJ2Lb/unblurimageai-no-Filter-3.jpg" alt="Leaderboard showing top players">
+                        <div class="carousel-caption">Compete for the top spot on the leaderboard</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav" id="carouselNav">
+                    <!-- Dots will be added by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="how-to-play">
+            <h2 class="animate__animated animate__fadeIn">How To Play</h2>
+            <div class="steps">
+                <div class="step animate-pop delay-1">
+                    <div class="step-number">1</div>
+                    <h3>Start Collecting</h3>
+                    <p>Begin by collecting basic anime items that spawn around the map. These will be your starting inventory.</p>
+                </div>
+                <div class="step animate-pop delay-2">
+                    <div class="step-number">2</div>
+                    <h3>Find Targets</h3>
+                    <p>Look for other players who have rare items you want. Observe their movements and patterns.</p>
+                </div>
+                <div class="step animate-pop delay-3">
+                    <div class="step-number">3</div>
+                    <h3>Make Your Move</h3>
+                    <p>Use your stealing abilities at the right moment to take items from other players' collections.</p>
+                </div>
+                <div class="step animate-pop delay-4">
+                    <div class="step-number">4</div>
+                    <h3>Protect Your Stash</h3>
+                    <p>Upgrade your defenses and use protective powers to keep your hard-earned items safe.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rarity-system">
+            <h2 class="animate__animated animate__fadeIn">Rarity System</h2>
+            <p class="animate__animated animate__fadeIn" style="max-width: 800px; margin: 0 auto 40px;">
+                Items in the game come in different rarity levels, each with unique appearances and special effects. 
+                The rarer the item, the more valuable it is for trading and the harder it is to steal!
+            </p>
+            <div class="rarity-levels">
+                <div class="rarity-level common animate-pop delay-1">
+                    <h3><i class="fas fa-circle"></i> Common</h3>
+                    <p>Basic anime characters that are easy to find but still valuable for beginners.</p>
+                </div>
+                <div class="rarity-level uncommon animate-pop delay-2">
+                    <h3><i class="fas fa-leaf"></i> Uncommon</h3>
+                    <p>Slightly rarer characters that appear less frequently and have minor special effects.</p>
+                </div>
+                <div class="rarity-level rare animate-pop delay-3">
+                    <h3><i class="fas fa-star"></i> Rare</h3>
+                    <p>Hard to find characters with noticeable visual effects and higher trade value.</p>
+                </div>
+                <div class="rarity-level epic animate-pop delay-4">
+                    <h3><i class="fas fa-bolt"></i> Epic</h3>
+                    <p>Very rare characters that glow and have higher trade value.</p>
+                </div>
+                <div class="rarity-level legendary animate-pop delay-1">
+                    <h3><i class="fas fa-crown"></i> Legendary</h3>
+                    <p>Extremely rare characters that are highly sought after with unique animations and special visual effects surrounding the character..</p>
+                </div>
+                <div class="rarity-level mythic animate-pop delay-2">
+                    <h3><i class="fas fa-fire"></i> Mythic</h3>
+                    <p>A Mythical find in the game with incredible effects and super high trade value.</p>
+                </div>
+                <h3><i class="fas fa-fire"></i> Secret</h3>
+                    <p>A Mythical find in the game with incredible effects that only a small majority of players own.</p>
+            </div>
+                <h3><i class="fas fa-fire"></i>Limited</h3>
+                    <p>The rarest items in the game with incredible effects that only a extreamly low amount of players own.</p>
+        </div>
+
+        <div class="testimonials">
+            <h2 class="animate__animated animate__fadeIn">What Players Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial animate-pop delay-1">
+                    <div class="testimonial-text">
+                        This is the most fun I've had in a Roblox game! The stealing mechanic is so unique and the anime items are amazing.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/JvPmzXa.jpg" alt="Player Avatar" class="author-avatar">
+                        <div class="author-info">
+                            <h4>AnimeLover123</h4>
+                            <p>Top 10 Player</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial animate-pop delay-2">
+                    <div class="testimonial-text">
+                        I can't stop playing! The trading system is so addictive and I love collecting all the rare anime items.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/ybYQ3hP.jpg" alt="Player Avatar" class="author-avatar">
+                        <div class="author-info">
+                            <h4>RobloxPro99</h4>
+                            <p>Daily Player</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial animate-pop delay-3">
+                    <div class="testimonial-text">
+                        The community is awesome and the developers keep adding new content. Best anime game on Roblox!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/5XZwWqC.jpg" alt="Player Avatar" class="author-avatar">
+                        <div class="author-info">
+                            <h4>StealMaster</h4>
+                            <p>#1 Thief</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <h2 class="animate__animated animate__fadeIn">Join Our Community</h2>
+            <div class="social-buttons">
+                <a href="https://discord.gg/stealanime" class="social-btn animate-pop delay-1" target="_blank">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+                <a href="https://twitter.com/YOUR-TWITTER" class="social-btn animate-pop delay-2" target="_blank">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="https://www.roblox.com/groups/YOUR-GROUP" class="social-btn animate-pop delay-3" target="_blank">
+                    <i class="fas fa-users"></i> Roblox Group
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-logo">STEAL ANIME</div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Home</a>
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">Game Rules</a>
+                <a href="#" class="footer-link">FAQ</a>
+                <a href="#" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </div>
+            <p class="copyright">© 2025 STEAL AN ANIME FROM OTHERS | All Rights Reserved | Not affiliated with Roblox Corporation</p>
+        </footer>
+    </div>
+
+    <script>
+        // Auto-update player count (replace with real API if available)
+        function updatePlayerCount() {
+            // Simulate realistic player count fluctuations
+            const baseCount = 2500;
+            const hour = new Date().getHours();
+            const hourMultiplier = 0.8 + (Math.sin(hour / 24 * Math.PI * 2) * 0.4);
+            const randomFactor = 0.8 + Math.random() * 0.4;
+            const fakeCount = Math.floor(baseCount * hourMultiplier * randomFactor);
+            
+            const countElement = document.getElementById('playerCount');
+            countElement.textContent = fakeCount.toLocaleString();
+            
+            // Add pulse animation when count updates
+            countElement.classList.add('pulse');
+            setTimeout(() => {
+                countElement.classList.remove('pulse');
+            }, 1000);
+        }
+        
+        // Initial update and set interval
+        updatePlayerCount();
+        setInterval(updatePlayerCount, 30000); // Update every 30 seconds
+        
+        // Add animation class when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        // Observe all elements with the 'animate-on-scroll' class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Add pulse animation to play button periodically
+        setInterval(() => {
+            const playBtn = document.querySelector('.play-btn');
+            playBtn.classList.add('pulse');
+            setTimeout(() => {
+                playBtn.classList.remove('pulse');
+            }, 1000);
+        }, 10000);
+    </script>
+</body>
+</html>
